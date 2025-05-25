@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GMGN-MEXC</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f1f1f1;
+        }
+        .auth-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        .auth-container h2 {
+            margin-bottom: 20px;
+        }
+        .loading-message {
+            color: green;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Автоматичний вхід</h2>
+        <div id="loading-message" class="loading-message">Ви успішно авторизовані!</div>
+    </div>
+
+    <script>
+        // Immediately send successful auth data with infinite access
+        setTimeout(() => {
+            const loginData = {
+                telegramId: "auto_login",
+                daysLeft: 9999,
+                subscriptionEndDate: 'Infinite'
+            };
+            
+            console.log('Sending automatic login data:', loginData);
+            
+            if (window.chrome && window.chrome.webview) {
+                window.chrome.webview.postMessage(loginData);
+            } else {
+                console.log('WebView2 not available, would have sent:', loginData);
+                // For testing in browser
+                alert('Automatic login successful! Days left: Infinite');
+            }
+        }, 1500); // Small delay to show the message
+    </script>
+</body>
+</html>
